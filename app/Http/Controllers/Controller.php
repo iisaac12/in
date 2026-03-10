@@ -54,5 +54,6 @@ class InventarisController extends Controller
             "message" => "Data inventaris berhasil ditambahkan",
             "data" => $inventaris
         ], 201);
+        
     }
 }
