@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventaris;
-
+ 
 class InventarisController extends Controller
 {
     // GET /api/inventaris
@@ -69,11 +69,11 @@ class InventarisController extends Controller
         }
 
         $validated = $request->validate([
-            'nama_barang' => 'sometimes|required|string',
-            'kategori' => 'sometimes|required|string',
-            'jumlah' => 'sometimes|required|integer|min:0',
-            'kondisi' => 'sometimes|required|in:Baik,Rusak Ringan,Rusak Berat',
-            'lokasi' => 'sometimes|required|string'
+            'nama_barang' => 'sometimes|string',
+            'kategori' => 'sometimes|string',
+            'jumlah' => 'sometimes|integer|min:0',
+            'kondisi' => 'sometimes|in:Baik,Rusak Ringan,Rusak Berat',
+            'lokasi' => 'sometimes|string'
         ]);
 
         $inventaris->update($validated);
