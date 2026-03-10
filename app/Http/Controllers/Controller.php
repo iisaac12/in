@@ -55,4 +55,53 @@ class InventarisController extends Controller
         ], 201);
         
     }
+
+    // PUT/PATCH /api/inventaris/{id}
+    public function update(Request $request, $id)
+    {
+        $inventaris = Inventaris::find($id);
+
+        if (!$inventaris) {
+            return response()->json([
+                "status" => "error",
+                "message" => "Data inventaris tidak ditemukan"
+            ], 404);
+        }
+
+        $validated = $request->validate([
+            'nama_barang' => 'sometimes|required|string',
+            'kategori' => 'sometimes|required|string',
+            'jumlah' => 'sometimes|required|integer|min:0',
+            'kondisi' => 'sometimes|required|in:Baik,Rusak Ringan,Rusak Berat',
+            'lokasi' => 'sometimes|required|string'
+        ]);
+
+        $inventaris->update($validated);
+
+        return response()->json([
+            "status" => "success",
+            "message" => "Data inventaris berhasil diperbarui",
+            "data" => $inventaris
+        ], 200);
+    }
+
+    // DELETE /api/inventaris/{id}
+    public function destroy($id)
+    {
+        $inventaris = Inventaris::find($id);
+
+        if (!$inventaris) {
+            return response()->json([
+                "status" => "error",
+                "message" => "Data inventaris tidak ditemukan"
+            ], 404);
+        }
+
+        $inventaris->delete();
+
+        return response()->json([
+            "status" => "success",
+            "message" => "Data inventaris berhasil dihapus"
+        ], 200);
+    }
 }
