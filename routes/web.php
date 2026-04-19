@@ -48,3 +48,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 });
 
 require __DIR__.'/auth.php';
+Route::prefix('api')->group(function () {
+    require __DIR__ . '/api.php';
+});
